@@ -6,7 +6,12 @@ const connectDB = require('./src/db/db.js');
 const foodRoutes = require('./src/routes/food.routes.js');
 const authRoutes = require('./src/routes/auth-route.js');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true
+}));
 
 
 connectDB();
