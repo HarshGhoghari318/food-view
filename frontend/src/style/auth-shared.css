@@ -79,6 +79,24 @@
   text-align: center;
   margin-bottom: var(--space-6);
 }
+.auth-input,
+.field-group select {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+}
+
+.field-group select option {
+    color: #000;
+}
+.field-group select:focus {
+    border-color: #3b82f6;
+}
 
 /* Grid layout */
 .choice-grid {

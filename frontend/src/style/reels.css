@@ -101,6 +101,31 @@
 .reel-btn:active { transform: translateY(1px); }
 .reel-btn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 
+/* Follow button appearance */
+.follow-btn { background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #fff; }
+.follow-btn:hover { background: rgba(255,255,255,0.04); }
+.follow-btn.following { background: #fff; color: var(--color-accent); border-color: transparent; }
+.follow-btn.following:hover { opacity: 0.95; }
+
+/* Profile / menu */
+.reel-profile { display:flex; align-items:center; gap:12px; pointer-events:auto; }
+.reel-avatar { width:44px; height:44px; border-radius:50%; object-fit:cover; border:2px solid rgba(255,255,255,.12); }
+.reel-name { color:#fff; font-weight:700; font-size:1rem; line-height:1; }
+.reel-handle { color:rgba(255,255,255,.85); font-size:0.85rem; opacity:.9; }
+
+.reel-menu-btn {
+  background: rgba(0,0,0,0.45);
+  color: #fff;
+  border-radius:8px;
+  padding: 6px 8px;
+  border: none;
+  cursor: pointer;
+  pointer-events:auto;
+}
+.reel-menu { position: absolute; right: 0; bottom: 48px; background: rgba(0,0,0,0.86); border-radius: 8px; padding: 6px; display:flex; flex-direction:column; gap:6px; z-index: 40; min-width: 140px; box-shadow: var(--shadow-md); }
+.reel-menu__item { background: transparent; color: #fff; border: none; text-align: left; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 0.95rem; }
+.reel-menu__item:hover { background: rgba(255,255,255,0.04); }
+
 /* Desktop tweaks */
 @media (min-width: 768px) {
   .reel-content { padding: 36px; }
@@ -129,9 +154,12 @@
   color: #fff;
   border: 1px solid rgba(255,255,255,.15);
   box-shadow: var(--shadow-md);
+  transition: transform .12s ease, background .12s ease;
 }
 
 .reel-action:active { transform: translateY(1px); }
+
+.reel-action.liked { background: linear-gradient(180deg,#ff6b6b,#ff3b30); color: #fff; transform: scale(1.05); }
 
 .reel-action__count {
   color: #fff;
@@ -150,3 +178,106 @@
 .empty-state{
   position: absolute; inset: 0; display: grid; place-items: center; color: #fff;
 }
+
+/* subtle pop animation for the menu */
+.reel-menu[data-anim] {
+  animation: pop .14s cubic-bezier(.2,.9,.3,1) both;
+}
+@keyframes pop {
+  from { transform: translateY(6px) scale(.98); opacity: 0; }
+  to   { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* play/pause indicator */
+.reel-play-indicator {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 48px;
+  color: rgba(255,255,255,0.95);
+  text-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.96);
+  transition: transform .18s ease, opacity .18s ease;
+}
+.reel-play-indicator.play { opacity: 1; transform: scale(1); }
+.reel-play-indicator.pause { opacity: 0.9; transform: scale(1); }
+
+/* Grid of thumbnails above the feed */
+.reels-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 12px;
+}
+.grid-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #111 0%, #000 100%);
+  padding-top: 100%; /* square */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.03);
+}
+.grid-item .grid-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: center;
+  transition: transform 260ms cubic-bezier(.2,.9,.3,1), filter 260ms ease;
+  filter: saturate(.95) contrast(.98);
+}
+.grid-item:hover .grid-video { transform: scale(1.07); filter: saturate(1.02) contrast(1.03); }
+
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 8px;
+  pointer-events: none;
+}
+
+/* Play icon: small bottom-left, translucent */
+.grid-play {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  color: rgba(255,255,255,0.95);
+  text-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.35);
+  padding: 6px 8px;
+  border-radius: 999px;
+}
+
+/* View count: centered bottom, pill style similar to screenshot */
+.grid-count {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.64);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 13px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .reels-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .reels-grid { grid-template-columns: repeat(1, 1fr); }
+}
+

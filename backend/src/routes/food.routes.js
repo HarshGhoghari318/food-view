@@ -13,6 +13,11 @@ const upload = multer({
 router.post("/create",authMiddleware.authFoodPartnerMiddleware, upload.single('video'), foodController.createFood)
 router.get("/getfoods",authMiddleware.authFoodUserMiddleware, foodController.getFoods)
 
+router.post('/:id/like', authMiddleware.authFoodUserMiddleware, foodController.toggleLike)
+router.post('/:id/comment', authMiddleware.authFoodUserMiddleware, foodController.addComment)
+router.get('/:id/comments', authMiddleware.authFoodUserMiddleware, foodController.getComments)
+router.post('/:id/share', authMiddleware.authFoodUserMiddleware, foodController.shareFood)
+
 
 
 

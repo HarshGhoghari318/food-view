@@ -2,9 +2,10 @@ const bcrypt = require("bcryptjs");
 const userModel = require("../models/userModel.js");
 const foodPartnerModel = require("../models/foodpartner.model.js");
 const jwt = require("jsonwebtoken");
+const foodModel= require("../models/food.model.js");
 
 async function registerUser(req, res) {
-  const { fullName, email, password } = req.body;
+  const { fullName, email, password, gender} = req.body;
 
   const isUserAlreadyExists = await userModel.findOne({
     email,
@@ -22,6 +23,7 @@ async function registerUser(req, res) {
     fullName,
     email,
     password: hashedPassword,
+    gender
   });
 
   const token = jwt.sign(
@@ -147,6 +149,52 @@ function logoutFoodPartner(req, res) {
   });
 }
 
+async function getFoodPartner(req, res) {
+  const { id } = req.params;
+  try {
+    const partner = await foodPartnerModel.findById(id)
+
+    const foodItems = await foodModel.find({ foodPartnerId: partner._id });
+    if (!partner) return res.status(404).json({ message: 'Food partner not found' });
+    res.status(200).json({ partner, foodItems });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+}
+
+async function getMe(req, res) {
+  try {
+    const user = await userModel.findById(req.user._id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+    res.status(200).json({ user });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+}
+
+async function toggleFollowPartner(req, res) {
+  const { id } = req.params;
+  try {
+    const partner = await foodPartnerModel.findById(id);
+    if (!partner) return res.status(404).json({ message: 'Partner not found' });
+
+    const user = await userModel.findById(req.user._id);
+    const idx = user.Following.findIndex(f => String(f) === String(id));
+    let followingNow = false;
+    if (idx === -1) {
+      user.Following.push(id);
+      followingNow = true;
+    } else {
+      user.Following.splice(idx, 1);
+      followingNow = false;
+    }
+    await user.save();
+    res.status(200).json({ message: followingNow ? 'followed' : 'unfollowed', following: user.Following, followingNow });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+}
+
 module.exports = {
   registerUser,
   loginUser,
@@ -154,4 +202,7 @@ module.exports = {
   registerFoodPartner,
   loginFoodPartner,
   logoutFoodPartner,
+  getFoodPartner,
+  getMe,
+  toggleFollowPartner,
 };

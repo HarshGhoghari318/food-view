@@ -1,128 +1,46 @@
 
 @import './theme.css';
 
-/* Layout container */
-.profile-page {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: var(--space-6) var(--space-6) var(--space-8);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-}
+/* Unique Profile UI overrides */
+.profile-page { max-width: 1100px; margin: 18px auto; display:flex; flex-direction:column; gap: 12px; }
 
-/* Header block */
-.profile-header {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  padding: var(--space-6);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-}
+/* Hero */
+.profile-hero { position: relative; height: 34vh; min-height:220px; display:grid; place-items:end; overflow:hidden; border-radius: 12px; }
+.profile-hero .hero-bg { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter: blur(6px) saturate(.95) brightness(.65); transform: scale(1.06); }
+.profile-hero::after { content:''; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0) 28%, rgba(0,0,0,0.62) 100%); }
 
-.profile-meta {
-  display: grid;
-  grid-template-columns: 120px 1fr;
-  align-items: center;
-  gap: var(--space-6);
-}
+.profile-header { position:relative; display:flex; align-items:center; gap:18px; padding:18px; width:100%; z-index:4; }
+.profile-avatar { width:96px; height:96px; border-radius:999px; object-fit:cover; border:3px solid rgba(255,255,255,0.12); box-shadow: 0 8px 30px rgba(0,0,0,.6); }
+.profile-meta { display:flex; align-items:center; gap:12px; width:100%; }
+.profile-meta-left { color:#fff; }
+.profile-name { font-weight:900; font-size:1.2rem; }
+.profile-bio { color: rgba(255,255,255,0.9); margin-top:6px; font-size:0.95rem; }
 
-.profile-avatar {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  background: var(--color-surface-alt);
-  border: 2px solid var(--color-border);
-}
+.profile-actions { margin-left:auto; display:flex; gap:10px; align-items:center; }
+.follow-btn { background: linear-gradient(90deg, var(--color-accent), var(--color-accent-hover)); color:#fff; border:none; padding:10px 14px; border-radius:999px; font-weight:800; box-shadow: var(--shadow-md); cursor:pointer; }
+.follow-btn[aria-pressed='true']{ transform: scale(.99); opacity:.92 }
+.message-btn { background: rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.06); padding:10px 12px; border-radius:10px; color:#fff; }
 
-.profile-info { display: grid; gap: var(--space-3); }
+.profile-stats { display:flex; gap:22px; padding:12px 18px; color:#fff; z-index:4; }
+.stat { display:flex; flex-direction:column; align-items:center; }
+.stat .num { font-weight:900; font-size:1.05rem; }
+.stat .label { color:rgba(255,255,255,0.82); font-size:0.85rem; }
 
-/* Pills */
-.profile-pill {
-  display: inline-flex;
-  align-items: center;
-  border-radius: 12px;
-  padding: 10px 14px;
-  border: 1px solid var(--color-border);
-  background: var(--color-surface-alt);
-  color: var(--color-text);
-  width: fit-content;
-  box-shadow: var(--shadow-sm);
-}
+/* Reels grid */
+.profile-reels { padding:18px; display:grid; grid-template-columns: repeat(2, 1fr); gap:12px; }
+.reel-card { position:relative; border-radius:10px; overflow:hidden; background:#000; box-shadow: 0 8px 26px rgba(0,0,0,.45); cursor:pointer; transition:transform .16s ease; }
+.reel-card:hover { transform: translateY(-6px); }
+.reel-thumb { width:100%; height:220px; object-fit:cover; display:block; }
+.reel-overlay-pill { position:absolute; right:10px; top:10px; background:rgba(0,0,0,0.6); color:#fff; padding:6px 8px; border-radius:999px; font-weight:800; }
+.card-body { padding:10px; color:#fff; display:flex; gap:8px; align-items:flex-start; }
+.reel-title { font-weight:800; font-size:0.95rem; }
+.reel-desc { color: rgba(255,255,255,0.75); font-size:0.86rem; }
 
-.profile-business { font-size: 1.25rem; font-weight: 700; }
-.profile-address { font-size: 1.05rem; color: var(--color-text-secondary); }
+.video-modal { position:fixed; inset:0; display:grid; place-items:center; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.85)); z-index:9999; }
+.video-modal-player { width:min(920px, 95%); height:min(520px, 70%); object-fit:contain; border-radius:8px; background:#000; }
+.modal-close { position:absolute; right:18px; top:18px; background:rgba(255,255,255,0.06); color:#fff; border:none; font-size:22px; padding:8px 12px; border-radius:8px; }
 
-/* Stats */
-.profile-stats {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-6);
-  border-top: 1px dashed var(--color-border);
-  padding-top: var(--space-6);
-}
+.profile-empty { padding:18px; text-align:center; color:rgba(255,255,255,0.9) }
 
-.profile-stat {
-  display: grid;
-  grid-template-rows: auto auto;
-  justify-items: center;
-  gap: var(--space-2);
-}
+@media (max-width:900px) { .profile-reels { grid-template-columns: repeat(1,1fr); } .reel-thumb { height:200px; } }
 
-.profile-stat-label {
-  font-size: 1.15rem;
-  color: var(--color-text-secondary);
-}
-
-.profile-stat-value {
-  font-size: 2rem;
-  font-weight: 800;
-}
-
-/* Separator line under header (as in wireframe) */
-.profile-sep {
-  height: 1px;
-  border: none;
-  background: var(--color-border);
-}
-
-/* Grid of videos */
-.profile-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.profile-grid-item { 
-    border: none;
-    aspect-ratio: 3 / 4; }
-
-.profile-grid-video {
-  display: grid;
-  place-items: center;
-  height: 100%;
-  background: var(--color-surface);
-  color: var(--color-text-secondary);
-  font-size: 1.5rem;
-}
-
-/* Responsive tweaks */
-@media (max-width: 900px) {
-  .profile-meta { grid-template-columns: 96px 1fr; }
-  .profile-avatar { width: 96px; height: 96px; }
-}
-
-@media (max-width: 680px) {
-
-}
-
-@media (max-width: 420px) {
-  .profile-meta { grid-template-columns: 72px 1fr; }
-  .profile-avatar { width: 72px; height: 72px; }
-  .profile-stats { gap: var(--space-4); }
-  .profile-stat-label { font-size: 1rem; }
-  .profile-stat-value { font-size: 1.5rem; }
-}
