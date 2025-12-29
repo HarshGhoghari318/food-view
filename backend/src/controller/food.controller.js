@@ -33,7 +33,7 @@ async function getFoods(req, res) {
     .populate("foodPartnerId")
     .populate("likes")
     .populate("comments.user")
-    .populate("savedBy");
+    
 
   res.status(200).json({
     foods: foods,
@@ -110,21 +110,28 @@ async function addComment(req, res) {
   const { text } = req.body;
   if (!text || !text.trim())
     return res.status(400).json({ message: "Comment cannot be empty" });
+
+  if (!req.user) {
+    return res.status(401).json({ message: "Please login to comment" });
+  }
+
   try {
+    console.log('addComment - params:', id, 'user:', req.user?._id, 'text length:', text ? text.length : 0);
     const food = await foodModel.findById(id);
     if (!food) return res.status(404).json({ message: "Food not found" });
 
     const comment = { user: req.user._id, text };
     food.comments.push(comment);
     await food.save();
-    // populate last comment user
-    const last = food.comments[food.comments.length - 1];
-    await last.populate("user");
-    res
-      .status(201)
-      .json({ comment: last, commentsCount: food.comments.length });
+
+    // reload and populate to get a populated last comment reliably
+    const fresh = await foodModel.findById(id).populate('comments.user');
+    const last = fresh.comments[fresh.comments.length - 1];
+
+    res.status(201).json({ comment: last, commentsCount: fresh.comments.length });
   } catch (err) {
-    res.status(500).json({ message: "Server error" });
+    console.error("Add comment error:", err);
+    res.status(500).json({ message: "Server error", error: err.message });
   }
 }
 

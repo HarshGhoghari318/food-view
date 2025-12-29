@@ -24,7 +24,7 @@ const foodSchema = new mongoose.Schema({
         createdAt: { type: Date, default: Date.now },
       }
     ],
-    savedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User', default: [] }],
+
     shares: { type: Number, default: 0 }
 }, { timestamps: true });
 
