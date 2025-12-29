@@ -73,3 +73,187 @@
   margin: 2px 0;
   font-size: 15px;
 }
+@import "./theme.css";
+
+/* PAGE */
+.profile-page-dark {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #0b1024, #050714);
+  color: white;
+  padding: 14px;
+}
+
+/* TOP BAR */
+.profile-topbar-dark {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.back-btn {
+  background: white;
+  color: black;
+  border: none;
+  padding: 4px 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.topbar-name {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+/* PROFILE HEADER */
+.partner-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.profile-avatar-large {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: white;
+}
+
+.partner-meta h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.muted {
+  opacity: 0.75;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* SECTION */
+.section-title {
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* REELS GRID */
+.reels-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.reel-thumb {
+  position: relative;
+  height: 220px;
+  background: black;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.reel-thumb video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.reel-play {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+  color: white;
+  background: rgba(0,0,0,0.25);
+}
+
+/* CREATE BUTTON */
+.create-reel-btn {
+  position: fixed;
+  right: 18px;
+  bottom: 22px;
+  padding: 14px 18px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #1c2bff, #4f7cff);
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* MODAL */
+.reels-modal {
+  position: fixed;
+  inset: 0;
+  background: black;
+  z-index: 1000;
+}
+
+.close-reels {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: none;
+  color: white;
+  font-size: 22px;
+  border: none;
+  cursor: pointer;
+}
+
+/* SCROLL VIEWER */
+.reels-scroll {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+}
+
+.reel-full {
+  height: 100vh;
+  scroll-snap-align: start;
+  position: relative;
+}
+
+.reel-full video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.reel-caption {
+  position: absolute;
+  bottom: 16px;
+  left: 14px;
+  right: 14px;
+}
+
+.reel-caption h5 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.reel-caption p {
+  margin: 4px 0 0;
+  font-size: 14px;
+  opacity: 0.85;
+}
+.logout-btn {
+  background: white;
+  color: black;
+  border: none;
+  padding: 5px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.logout-btn:active {
+  transform: scale(0.96);
+}

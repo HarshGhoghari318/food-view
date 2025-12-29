@@ -148,6 +148,19 @@ const CreateFood = () => {
       
 
       <div className="create-food-page">
+        {/* Top navigation arrows */}
+<div className="create-food-nav">
+  <button
+    className="nav-arrow"
+    onClick={() => navigate(-1)}
+    aria-label="Go back"
+  >
+    →
+  </button>
+
+
+</div>
+
         {/* Upload overlay */}
         {isUploading && (
           <div className="upload-overlay" role="status" aria-live="polite">

@@ -318,3 +318,46 @@ body.uploading {
 body.dark .upload-card { background: #0b1220; color: #e6eef8; }
 body.dark .toast.success { background: #042e27; color: #bbf7d0; }
 body.dark .toast.error { background: #3b0b12; color: #ffd7de; }
+/* ================= NAV ARROWS ================= */
+
+.create-food-nav {
+  position: fixed;
+  top: 30px;
+  left: 75%;
+  right: 16px;
+
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none; /* container ignores clicks */
+  z-index: 1200;
+}
+
+.nav-arrow {
+  pointer-events: auto; /* button receives clicks */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+
+  display: grid;
+  place-items: center;
+
+  background: rgba(15, 23, 36, 0.7);
+  backdrop-filter: blur(6px);
+
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+
+  border: 1px solid rgba(255,255,255,0.15);
+  cursor: pointer;
+
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.nav-arrow:hover {
+  background: rgba(15, 23, 36, 0.9);
+}
+
+.nav-arrow:active {
+  transform: scale(0.94);
+}
