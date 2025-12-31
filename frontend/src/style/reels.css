@@ -83,18 +83,19 @@
 .reel-content {
   position: relative;
   width: 100%;
-  padding: var(--space-6);
+  padding: var(--space-4);
   padding-bottom: calc(env(safe-area-inset-bottom, 0) + 72px); /* make space for bottom nav */
   display: flex;
   flex-direction: column;
   padding-right: 4.5rem;
-  gap: var(--space-4);
+  gap: var(--space-2);
   pointer-events: auto; /* enable button click */
 }
 
 /* Truncated to two lines */
 .reel-description {
   color: #fff;
+  margin-left: 10px;
   text-shadow: 0 1px 2px rgba(0,0,0,.4);
   font-size: 1rem;
   line-height: 1.3;
@@ -151,7 +152,7 @@
 
 /* Desktop tweaks */
 @media (min-width: 768px) {
-  .reel-content { padding: 36px; }
+  .reel-content { padding: 36px; margin-bottom:40px; }
   .reel-description { font-size: 1.05rem; max-width: 70ch; }
 }
 
