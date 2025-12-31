@@ -21,4 +21,4 @@ router.post("/share/:id",authMiddleware.authFoodUserMiddleware, foodController.s
 router.post("/save/:id",authMiddleware.authFoodUserMiddleware, foodController.toggleSaveFood)
 
 
-module.exports = router;
+export default router;

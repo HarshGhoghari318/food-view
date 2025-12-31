@@ -237,7 +237,7 @@ async function toggleFollowPartner(req, res) {
   }
 }
 
-module.exports = {
+export default {
   registerUser,
   loginUser,
   logoutUser,

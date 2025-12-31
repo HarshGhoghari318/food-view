@@ -160,7 +160,7 @@ async function shareFood(req, res) {
   }
 }
 
-module.exports = {
+export default {
   createFood,
   getFoods,
   toggleLike,

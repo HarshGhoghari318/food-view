@@ -18,6 +18,6 @@ async function uploadFile(file, fileName){
 }
 
 
-module.exports = {
+export default {
     uploadFile
 };

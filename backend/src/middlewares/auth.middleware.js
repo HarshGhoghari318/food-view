@@ -51,6 +51,6 @@ async function authFoodUserMiddleware(req, res, next) {
     
 }
 
-module.exports = {authFoodPartnerMiddleware,
+export default {authFoodPartnerMiddleware,
     authFoodUserMiddleware
 };

@@ -23,4 +23,4 @@ router.get('/me',authFoodPartnerMiddleware,authController.getTokenPartner)
 
 
 
-module.exports = router;
+export default router;
