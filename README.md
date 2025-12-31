@@ -1,4 +1,4 @@
-# MERN Food Reels 📽️🍔
+# MERN Food Reels 📽️🍔(For Mobile View)
 
 A small MERN (MongoDB, Express, React, Node) project that implements a Reels-style feed for food items with user authentication, comments, save/bookmark, likes, shares and food-partner accounts.
 
