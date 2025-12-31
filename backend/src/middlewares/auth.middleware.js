@@ -2,7 +2,7 @@ import foodPartnerModel from "../models/foodpartner.model.js";
 import userModel from "../models/userModel.js";
 import jwt from "jsonwebtoken";
 
-async function authFoodPartnerMiddleware(req, res, next) {
+export const authFoodPartnerMiddleware= async (req, res, next) =>  {
     const token = req.cookies.token;
     if (!token) {
         return res.status(401).json({ message: "Please login first" });
@@ -29,7 +29,7 @@ async function authFoodPartnerMiddleware(req, res, next) {
     }
     
 }
-async function authFoodUserMiddleware(req, res, next) {
+export const authFoodUserMiddleware=async (req, res, next) => {
     const token = req.cookies.token;
     if (!token) {
         console.log('No auth token present for request to', req.path);
@@ -51,6 +51,4 @@ async function authFoodUserMiddleware(req, res, next) {
     
 }
 
-export default {authFoodPartnerMiddleware,
-    authFoodUserMiddleware
-};
+
