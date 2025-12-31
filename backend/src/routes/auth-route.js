@@ -1,6 +1,6 @@
 import express from 'express';
 import authController from '../controller/auth.controllers.js';
-import{ authFoodUserMiddleware, authFoodPartnerMiddleware } from '../middlewares/auth.middleware';
+import { authFoodUserMiddleware, authFoodPartnerMiddleware } from '../middlewares/auth.middleware';
 
 const router = express.Router();
 

@@ -1,8 +1,8 @@
 import bcrypt  from "bcryptjs";
-import userModel from"../models/userModel.js";
+import userModel from "../models/userModel.js";
 import foodPartnerModel from "../models/foodpartner.model.js";
-import jwt from"jsonwebtoken";
-import foodModel from"../models/food.model.js";
+import jwt from "jsonwebtoken";
+import foodModel from "../models/food.model.js";
 
 async function registerUser(req, res) {
   const { fullName, email, password, gender} = req.body;

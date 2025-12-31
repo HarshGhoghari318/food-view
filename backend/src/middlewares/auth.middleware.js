@@ -1,6 +1,6 @@
 import foodPartnerModel from "../models/foodpartner.model.js";
-import userModel from"../models/userModel.js";
-import jwt from"jsonwebtoken";
+import userModel from "../models/userModel.js";
+import jwt from "jsonwebtoken";
 
 async function authFoodPartnerMiddleware(req, res, next) {
     const token = req.cookies.token;
