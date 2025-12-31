@@ -1,7 +1,7 @@
 const foodModel = require("../models/food.model.js");
 const userModel = require("../models/userModel.js");
 const { uploadFile } = require("../services/storage.service.js");
-const { v4: uuid } = require("uuid");
+import { v4 as uuid } from "uuid";
 
 async function createFood(req, res) {
   const fileResult = await uploadFile(req.file.buffer, uuid());
