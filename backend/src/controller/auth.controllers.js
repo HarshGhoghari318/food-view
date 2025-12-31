@@ -35,7 +35,7 @@ async function registerUser(req, res) {
       process.env.JWT_SECRET
     );
 
-    // set cookie with safe defaults for local dev
+    
     res.cookie("token", token, {
       httpOnly: true,
       secure: true,
@@ -85,7 +85,6 @@ async function loginUser(req, res) {
       process.env.JWT_SECRET
     );
 
-    
     res.cookie("token", token, {
       httpOnly: true,
       secure: true,
@@ -130,7 +129,11 @@ async function registerFoodPartner(req, res) {
     address,
   });
   const token = jwt.sign({ id: foodPartner._id }, process.env.JWT_SECRET);
-  res.cookie("token", token);
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+  });
 
   res.status(201).json({
     message: "Food partner registered successfully",
@@ -154,7 +157,12 @@ async function loginFoodPartner(req, res) {
   }
   const token = jwt.sign({ id: foodPartner._id }, process.env.JWT_SECRET);
   // set cookie for partner login
-  res.cookie("token", token, { httpOnly: true, sameSite: "lax" });
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: true, // REQUIRED on https (Vercel)
+    sameSite: "none", // REQUIRED for cross-site
+    path: "/", // VERY IMPORTANT
+  });
   console.log("Set auth cookie for food partner", foodPartner._id);
   res.status(200).json({
     message: "Food partner logged in successfully",
