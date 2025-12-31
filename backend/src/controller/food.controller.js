@@ -1,10 +1,10 @@
 import foodModel from "../models/food.model.js";
 import userModel from "../models/userModel.js";
-import  uploadFile  from "../services/storage.service.js";
+import { uploadFile } from "../services/storage.service.js";
 import { v4 as uuid } from "uuid";
 
 async function createFood(req, res) {
-  const fileResult = await uploadFile.uploadFile(req.file.buffer, uuid());
+  const fileResult = await uploadFile(req.file.buffer, uuid());
   console.log(req.foodPartner)
 
   try {

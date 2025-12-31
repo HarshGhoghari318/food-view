@@ -1,15 +1,17 @@
-
+// Load environment variables FIRST before any other imports
+import './config/env.js';
 
 import express from 'express';
+
 const app = express();
 import connectDB from'./src/db/db.js';
 import foodRoutes from './src/routes/food.routes.js';
 import authRoutes from './src/routes/auth-route.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-dotenv.config();
+
 app.use(cors({
-    origin: ["http://localhost:5173","https://food-flix-h13.vercel.app"],
+    origin: "http://localhost:5173",
     credentials: true
 }));
 

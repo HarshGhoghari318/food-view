@@ -1,23 +1,22 @@
 import ImageKit from "imagekit";
 
-const imagekit = new ImageKit({
-    publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
-    privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
-    urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT
-});
+// Lazy initialization - only create ImageKit instance when needed
+let imagekit = null;
 
-
-async function uploadFile(file, fileName){
-    const result= await imagekit.upload({
-        file: file,
-        fileName: fileName
+function getImageKit() {
+  if (!imagekit) {
+    imagekit = new ImageKit({
+      publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
+      privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
+      urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT
     });
-    
-    return result;
-
+  }
+  return imagekit;
 }
 
-
-export default {
-    uploadFile
-};
+export async function uploadFile(file, fileName) {
+  return getImageKit().upload({
+    file,
+    fileName
+  });
+}
