@@ -36,7 +36,11 @@ async function registerUser(req, res) {
     );
 
     // set cookie with safe defaults for local dev
-    res.cookie("token", token, { httpOnly: true, sameSite: "lax" });
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    });
     console.log("Set auth cookie for user", user._id);
 
     res.status(201).json({
@@ -81,8 +85,12 @@ async function loginUser(req, res) {
       process.env.JWT_SECRET
     );
 
-    // set cookie with safe defaults for local dev
-    res.cookie("token", token, { httpOnly: true, sameSite: "lax" });
+    
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    });
     console.log("Set auth cookie for user", user._id);
 
     res.status(200).json({
